@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MediRec</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mic" viewBox="0 0 24 24"><path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4Zm6-4a1 1 0 1 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 1 1 2 0 6 6 0 0 0 12 0Z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path fill="currentColor" d="M3 6a2 2 0 0 1 2-2h4.2a2 2 0 0 1 1.5.7L12 6h7a2 2 0 0 1 2 2v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3" fill="currentColor"/></symbol>
+  <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5" fill="currentColor"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.6v12.8a1 1 0 0 0 1.5.86l10.4-6.4a1 1 0 0 0 0-1.72L9.5 4.74A1 1 0 0 0 8 5.6Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.2" height="14" rx="1.4" fill="currentColor"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-rewind" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5V2.5a.5.5 0 0 0-.85-.35L7.4 5.9a.5.5 0 0 0 0 .7l3.75 3.75A.5.5 0 0 0 12 10V7a6 6 0 1 1-6 6 1 1 0 1 0-2 0 8 8 0 1 0 8-8Z"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm8 1.5V9h4.5L14 4.5ZM8 12a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Zm0 4a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H8Z"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v8.6l2.3-2.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4l2.3 2.3V4a1 1 0 0 1 1-1ZM5 17a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1a1 1 0 0 1 1-1Z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path fill="currentColor" d="M10.7 5.3a1 1 0 0 1 0 1.4L6.4 11H19a1 1 0 1 1 0 2H6.4l4.3 4.3a1 1 0 1 1-1.4 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 0 1 1.4 0Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16.2 5.8 12.5a1 1 0 0 0-1.4 1.4l4.4 4.4a1 1 0 0 0 1.4 0l9.4-9.4a1 1 0 0 0-1.4-1.4l-8.7 8.7Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path fill="currentColor" d="M9 3h6a1 1 0 0 1 1 1v1h4a1 1 0 1 1 0 2h-1l-.9 12.1A2 2 0 0 1 16.1 21H7.9a2 2 0 0 1-2-1.9L5 7H4a1 1 0 0 1 0-2h4V4a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<template id="tplPlayer">
+  <div class="player">
+    <button class="pbtn back" data-act="back" aria-label="Retroceder 5 segundos"><svg><use href="#i-rewind"/></svg><span>5 s</span></button>
+    <button class="pbtn play" data-act="play"><svg class="ico-play"><use href="#i-play"/></svg><svg class="ico-pause"><use href="#i-pause"/></svg><span class="lbl">Escuchar</span></button>
+    <div class="ptrack">
+      <input type="range" data-seek min="0" max="1000" value="0" aria-label="Posición del audio">
+      <span class="ptime" data-time>00:00 / 00:00</span>
+    </div>
+    <button class="pbtn speed" data-act="speed" aria-label="Velocidad de reproducción">1×</button>
+  </div>
+</template>
+<audio id="audio" preload="auto"></audio>
+
+<header class="top">
+  <div class="brand">
+    <img class="logo" src="logo.svg" alt="" width="48" height="48">
+    <div>
+      <h1>MediRec</h1>
+      <p>De la voz al texto, fácil y seguro</p>
+    </div>
+  </div>
+  <ol class="steps" aria-label="Pasos">
+    <li id="st1" class="on"><b>1</b><span>Audio</span></li>
+    <li id="st2"><b>2</b><span>Transcribir</span></li>
+    <li id="st3"><b>3</b><span>Texto y PDF</span></li>
+  </ol>
+</header>
+
+<main>
+  <section id="s1" class="card">
+    <h2>¿Qué desea hacer?</h2>
+    <p class="lead">Elija una opción para empezar.</p>
+    <div class="choices">
+      <button id="btnRec" class="choice rec">
+        <span class="bubble"><svg><use href="#i-mic"/></svg></span>
+        <strong>Grabar con el micrófono</strong>
+        <small>Hable y la aplicación escuchará</small>
+      </button>
+      <button id="btnFile" class="choice file">
+        <span class="bubble"><svg><use href="#i-folder"/></svg></span>
+        <strong>Elegir un archivo de audio</strong>
+        <small>Ya tengo una grabación guardada</small>
+      </button>
+    </div>
+  </section>
+
+  <section id="sRec" class="card center" data-state="idle" hidden>
+    <div class="badge st-idle">Preparado para grabar</div>
+    <div class="badge live st-rec"><span class="dot"></span> Grabando</div>
+    <div class="badge paused st-paused"><svg><use href="#i-pause"/></svg> En pausa</div>
+    <div class="timer" id="timer" role="timer">00:00</div>
+    <div class="meter" aria-hidden="true"><div id="meterBar"></div></div>
+
+    <div class="mic-pick st-idle">
+      <label for="micSelect">Micrófono</label>
+      <select id="micSelect"></select>
+    </div>
+    <p class="lead st-rec st-paused" id="recMic"></p>
+
+    <div class="row st-idle">
+      <button id="btnBackRec" class="big ghost"><svg><use href="#i-back"/></svg>Volver</button>
+      <button id="btnStart" class="big red grow"><svg><use href="#i-rec"/></svg>Empezar a grabar</button>
+    </div>
+    <div class="row st-rec">
+      <button id="btnPause" class="big amber"><svg><use href="#i-pause"/></svg>Pausar</button>
+      <button id="btnStop" class="big red grow"><svg><use href="#i-stop"/></svg>Terminar</button>
+    </div>
+    <div class="row st-paused">
+      <button id="btnResume" class="big blue"><svg><use href="#i-rec"/></svg>Seguir grabando</button>
+      <button id="btnStop2" class="big red grow"><svg><use href="#i-stop"/></svg>Terminar</button>
+    </div>
+    <button id="btnDiscard" class="link st-rec st-paused"><svg><use href="#i-trash"/></svg><span>Borrar y empezar de nuevo</span></button>
+  </section>
+
+  <section id="sReady" class="card center" hidden>
+    <span class="okbadge"><svg><use href="#i-check"/></svg></span>
+    <h2>Audio listo</h2>
+    <p class="info" id="audioInfo"></p>
+    <div class="slot" data-player></div>
+    <div class="row">
+      <button id="btnBack1" class="big ghost"><svg><use href="#i-back"/></svg>Otro audio</button>
+      <button id="btnTranscribe" class="big blue grow"><svg><use href="#i-text"/></svg>Convertir a texto</button>
+    </div>
+  </section>
+
+  <section id="s2" class="card center" hidden>
+    <div class="spinner" aria-hidden="true"></div>
+    <h2>Transcribiendo…</h2>
+    <p class="lead">Esto puede tardar unos minutos. No cierre la aplicación.</p>
+    <progress id="prog" max="100" value="0"></progress>
+    <p class="info" id="progText">0 %</p>
+  </section>
+
+  <section id="s3" class="card fill" hidden>
+    <div class="s3-head">
+      <h2>Revise el texto</h2>
+      <div class="title-field">
+        <label for="title">Título</label>
+        <input id="title" type="text" value="Transcripción">
+      </div>
+    </div>
+    <div class="slot" data-player></div>
+    <p class="hint">Escuche el audio mientras corrige. Tecla <kbd>F4</kbd>: reproducir o pausar.</p>
+    <textarea id="text" aria-label="Texto transcrito"></textarea>
+    <div class="row">
+      <button id="btnNew" class="big ghost"><svg><use href="#i-back"/></svg>Empezar de nuevo</button>
+      <button id="btnPdf" class="big green grow"><svg><use href="#i-pdf"/></svg>Guardar como PDF</button>
+    </div>
+  </section>
+</main>
+<div id="msg" role="alert" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

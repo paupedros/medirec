@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "MediRec",
+  "version": "0.1.0",
+  "identifier": "com.medirec.app",
+  "build": { "frontendDist": "../src" },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      { "label": "main", "title": "MediRec", "width": 1000, "height": 740, "minWidth": 820, "minHeight": 640, "center": true, "visible": false }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; img-src 'self' data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "publisher": "Pau Pedros",
+    "copyright": "© 2026 Pau Pedros · MIT",
+    "category": "Productivity",
+    "shortDescription": "Graba o elige audio, transcríbelo sin internet y guárdalo en PDF",
+    "windows": {
+      "nsis": { "languages": ["Spanish"], "installMode": "currentUser" }
+    },
+    "icon": ["icons/icon.ico"],
+    "resources": { "models/ggml-small-q5_1.bin": "models/ggml-small-q5_1.bin" }
+  }
+}

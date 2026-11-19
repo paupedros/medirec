@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#5aa8ff"/>
+      <stop offset="0.55" stop-color="#1667e0"/>
+      <stop offset="1" stop-color="#0a3d9e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.12" r="0.75">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dce9ff"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#001a4d" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#bg)"/>
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#glow)"/>
+  <rect x="34" y="34" width="956" height="956" rx="222" fill="none" stroke="#fff" stroke-opacity="0.18" stroke-width="4"/>
+
+  <!-- sound waves -->
+  <g fill="none" stroke="#fff" stroke-linecap="round">
+    <path d="M258 352 Q206 452 258 552" stroke-width="40" stroke-opacity="0.75"/>
+    <path d="M766 352 Q818 452 766 552" stroke-width="40" stroke-opacity="0.75"/>
+    <path d="M168 292 Q88 452 168 612" stroke-width="36" stroke-opacity="0.4"/>
+    <path d="M856 292 Q936 452 856 612" stroke-width="36" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- microphone -->
+  <g filter="url(#sh)">
+    <rect x="404" y="196" width="216" height="372" rx="108" fill="url(#mic)"/>
+    <g stroke="#1667e0" stroke-opacity="0.22" stroke-width="14" stroke-linecap="round">
+      <line x1="452" y1="300" x2="572" y2="300"/>
+      <line x1="452" y1="356" x2="572" y2="356"/>
+      <line x1="452" y1="412" x2="572" y2="412"/>
+    </g>
+    <g fill="none" stroke="#fff" stroke-width="46" stroke-linecap="round">
+      <path d="M322 470 A190 190 0 0 0 702 470"/>
+      <line x1="512" y1="664" x2="512" y2="776"/>
+      <line x1="404" y1="800" x2="620" y2="800"/>
+    </g>
+  </g>
+
+  <!-- recording dot -->
+  <circle cx="742" cy="252" r="62" fill="#ff3b4f" stroke="#fff" stroke-width="18"/>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "name": "medirec",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Graba o elige audio, transcríbelo sin internet y expórtalo a PDF",
+  "license": "MIT",
+  "scripts": { "tauri": "tauri" },
+  "devDependencies": { "@tauri-apps/cli": "^2" }
+}

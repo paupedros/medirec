@@ -1,0 +1,7 @@
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+# Speech models are large (>100 MB); fetch with scripts/descargar-modelo.ps1
+src-tauri/models/*.bin
+# Local design-tool config
+.impeccable/

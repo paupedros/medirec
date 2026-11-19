@@ -1,0 +1,8 @@
+[env]
+# bindgen (whisper-rs-sys) needs libclang
+LIBCLANG_PATH = "C:\\Program Files\\LLVM\\bin"
+# cmake-rs on MSVC strips /O2 from CMAKE_C_FLAGS_RELEASE, so whisper.cpp was
+# built unoptimized. whisper-rs-sys forwards CMAKE_* env vars as -D defines,
+# and cmake-rs then keeps them as-is.
+CMAKE_C_FLAGS_RELEASE = "/MD /O2 /Ob2 /DNDEBUG"
+CMAKE_CXX_FLAGS_RELEASE = "/MD /O2 /Ob2 /DNDEBUG /utf-8 /EHsc"
